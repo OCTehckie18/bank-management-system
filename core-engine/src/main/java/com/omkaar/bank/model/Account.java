@@ -3,6 +3,9 @@ package com.omkaar.bank.model;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import com.omkaar.bank.exception.AccountFrozenException;
+import com.omkaar.bank.exception.InsufficientBalanceException;
+
 public abstract class Account {
 
     protected final String accountId;
@@ -43,14 +46,14 @@ public abstract class Account {
     protected void debit(BigDecimal amount) {
         validateActive();
         if (this.balance.compareTo(amount) < 0) {
-            throw new IllegalStateException("Insufficient balance");
+            throw new InsufficientBalanceException("Insufficient balance");
         }
         this.balance = this.balance.subtract(amount);
     }
 
     protected void validateActive() {
         if (frozen) {
-            throw new IllegalStateException("Account is frozen");
+            throw new AccountFrozenException("Account is frozen");
         }
     }
 

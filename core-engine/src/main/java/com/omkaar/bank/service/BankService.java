@@ -1,0 +1,98 @@
+package com.omkaar.bank.service;
+
+import com.omkaar.bank.model.Account;
+import com.omkaar.bank.model.Transaction;
+import com.omkaar.bank.model.TransactionType;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+public class BankService {
+
+    private final Map<String, Account> accounts = new HashMap<>();
+    private final Stack<Transaction> transactionStack = new Stack<>();
+
+    public void registerAccount(Account account) {
+        accounts.put(account.getAccountId(), account);
+    }
+
+    public void deposit(String accountId, BigDecimal amount) {
+        Account account = getAccount(accountId);
+
+        account.credit(amount);
+
+        Transaction tx = new Transaction(
+                TransactionType.DEPOSIT,
+                null,
+                accountId,
+                amount);
+
+        transactionStack.push(tx);
+    }
+
+    public void withdraw(String accountId, BigDecimal amount) {
+        Account account = getAccount(accountId);
+
+        account.debit(amount);
+
+        Transaction tx = new Transaction(
+                TransactionType.WITHDRAWAL,
+                accountId,
+                null,
+                amount);
+
+        transactionStack.push(tx);
+    }
+
+    public void transfer(String fromId, String toId, BigDecimal amount) {
+        Account from = getAccount(fromId);
+        Account to = getAccount(toId);
+
+        from.debit(amount);
+        to.credit(amount);
+
+        Transaction tx = new Transaction(
+                TransactionType.TRANSFER,
+                fromId,
+                toId,
+                amount);
+
+        transactionStack.push(tx);
+    }
+
+    public void undoLastTransaction() {
+        if (transactionStack.isEmpty()) {
+            throw new IllegalStateException("No transactions to undo");
+        }
+
+        Transaction tx = transactionStack.pop();
+
+        switch (tx.getType()) {
+            case DEPOSIT -> {
+                Account acc = getAccount(tx.getToAccountId());
+                acc.debit(tx.getAmount());
+            }
+            case WITHDRAWAL -> {
+                Account acc = getAccount(tx.getFromAccountId());
+                acc.credit(tx.getAmount());
+            }
+            case TRANSFER -> {
+                Account from = getAccount(tx.getFromAccountId());
+                Account to = getAccount(tx.getToAccountId());
+
+                to.debit(tx.getAmount());
+                from.credit(tx.getAmount());
+            }
+        }
+    }
+
+    private Account getAccount(String accountId) {
+        Account acc = accounts.get(accountId);
+        if (acc == null) {
+            throw new IllegalArgumentException("Account not found: " + accountId);
+        }
+        return acc;
+    }
+}
