@@ -1,3 +1,5 @@
 com\omkaar\bank\model\CurrentAccount.class
 com\omkaar\bank\model\SavingsAccount.class
+com\omkaar\bank\model\TransactionType.class
 com\omkaar\bank\model\Account.class
+com\omkaar\bank\model\Transaction.class
