@@ -51,6 +51,14 @@ public abstract class Account {
         this.balance = this.balance.subtract(amount);
     }
 
+    public void deposit(BigDecimal amount) {
+        credit(amount);
+    }
+
+    public void withdraw(BigDecimal amount) {
+        debit(amount);
+    }
+
     protected void validateActive() {
         if (frozen) {
             throw new AccountFrozenException("Account is frozen");

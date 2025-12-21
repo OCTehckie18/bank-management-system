@@ -21,7 +21,7 @@ public class BankService {
     public void deposit(String accountId, BigDecimal amount) {
         Account account = getAccount(accountId);
 
-        account.credit(amount);
+        account.deposit(amount);
 
         Transaction tx = new Transaction(
                 TransactionType.DEPOSIT,
@@ -35,7 +35,7 @@ public class BankService {
     public void withdraw(String accountId, BigDecimal amount) {
         Account account = getAccount(accountId);
 
-        account.debit(amount);
+        account.withdraw(amount);
 
         Transaction tx = new Transaction(
                 TransactionType.WITHDRAWAL,
@@ -50,8 +50,8 @@ public class BankService {
         Account from = getAccount(fromId);
         Account to = getAccount(toId);
 
-        from.debit(amount);
-        to.credit(amount);
+        from.withdraw(amount);
+        to.deposit(amount);
 
         Transaction tx = new Transaction(
                 TransactionType.TRANSFER,
@@ -72,18 +72,18 @@ public class BankService {
         switch (tx.getType()) {
             case DEPOSIT -> {
                 Account acc = getAccount(tx.getToAccountId());
-                acc.debit(tx.getAmount());
+                acc.withdraw(tx.getAmount());
             }
             case WITHDRAWAL -> {
                 Account acc = getAccount(tx.getFromAccountId());
-                acc.credit(tx.getAmount());
+                acc.deposit(tx.getAmount());
             }
             case TRANSFER -> {
                 Account from = getAccount(tx.getFromAccountId());
                 Account to = getAccount(tx.getToAccountId());
 
-                to.debit(tx.getAmount());
-                from.credit(tx.getAmount());
+                to.withdraw(tx.getAmount());
+                from.deposit(tx.getAmount());
             }
         }
     }
