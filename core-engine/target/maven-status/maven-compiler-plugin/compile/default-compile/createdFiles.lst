@@ -6,4 +6,5 @@ com\omkaar\bank\model\TransactionType.class
 com\omkaar\bank\model\Account.class
 com\omkaar\bank\model\Transaction.class
 com\omkaar\bank\exception\InsufficientBalanceException.class
+com\omkaar\bank\model\LoanRequest.class
 com\omkaar\bank\service\BankService.class

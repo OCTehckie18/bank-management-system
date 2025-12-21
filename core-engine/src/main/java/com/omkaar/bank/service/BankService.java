@@ -1,18 +1,22 @@
 package com.omkaar.bank.service;
 
-import com.omkaar.bank.model.Account;
-import com.omkaar.bank.model.Transaction;
-import com.omkaar.bank.model.TransactionType;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Stack;
+
+import com.omkaar.bank.model.Account;
+import com.omkaar.bank.model.LoanRequest;
+import com.omkaar.bank.model.Transaction;
+import com.omkaar.bank.model.TransactionType;
 
 public class BankService {
 
     private final Map<String, Account> accounts = new HashMap<>();
     private final Stack<Transaction> transactionStack = new Stack<>();
+    private final Queue<LoanRequest> loanQueue = new LinkedList<>();
 
     public void registerAccount(Account account) {
         accounts.put(account.getAccountId(), account);
@@ -95,4 +99,25 @@ public class BankService {
         }
         return acc;
     }
+
+    public void requestLoan(String accountId, BigDecimal amount) {
+        getAccount(accountId); // validate existence
+
+        LoanRequest request = new LoanRequest(accountId, amount);
+        loanQueue.offer(request);
+    }
+
+    public LoanRequest processNextLoanRequest() {
+        LoanRequest request = loanQueue.poll();
+
+        if (request == null) {
+            throw new IllegalStateException("No loan requests to process");
+        }
+
+        Account account = getAccount(request.getAccountId());
+        account.deposit(request.getAmount());
+
+        return request;
+    }
+
 }
