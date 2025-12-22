@@ -12,7 +12,7 @@ import com.omkaar.bank.model.LoanRequest;
 import com.omkaar.bank.model.Transaction;
 import com.omkaar.bank.model.TransactionType;
 
-public class BankService {
+public class BankService implements BankOperations {
 
     private final Map<String, Account> accounts = new HashMap<>();
     private final Stack<Transaction> transactionStack = new Stack<>();
@@ -20,6 +20,12 @@ public class BankService {
 
     public void registerAccount(Account account) {
         accounts.put(account.getAccountId(), account);
+    }
+
+    @Override
+    public void registerAccount(String accountId) {
+        throw new UnsupportedOperationException(
+                "Account registration must be done via domain creation");
     }
 
     public void deposit(String accountId, BigDecimal amount) {
