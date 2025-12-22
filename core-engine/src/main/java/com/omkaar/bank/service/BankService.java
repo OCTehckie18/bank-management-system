@@ -20,15 +20,16 @@ public class BankService implements BankOperations {
     private final Queue<LoanRequest> loanQueue = new LinkedList<>();
     private final TransactionHistory transactionHistory = new InMemoryTransactionHistory();
 
+    @Override
     public void registerAccount(Account account) {
         accounts.put(account.getAccountId(), account);
     }
 
-    @Override
-    public void registerAccount(String accountId) {
-        throw new UnsupportedOperationException(
-                "Account registration must be done via domain creation");
-    }
+    // @Override
+    // public void registerAccount(String accountId) {
+    // throw new UnsupportedOperationException(
+    // "Account registration must be done via domain creation");
+    // }
 
     @Override
     public void deposit(String accountId, BigDecimal amount) {
@@ -137,9 +138,19 @@ public class BankService implements BankOperations {
         Account account = getAccount(request.getAccountId());
         account.deposit(request.getAmount());
 
+        Transaction tx = new Transaction(
+                TransactionType.DEPOSIT,
+                null,
+                request.getAccountId(),
+                request.getAmount());
+
+        transactionStack.push(tx); // optional, but consistent
+        transactionHistory.record(tx); // CRITICAL LINE
+
         return request;
     }
 
+    @Override
     public List<Transaction> getTransactionHistory(String accountId) {
         return transactionHistory.getByAccountId(accountId);
     }

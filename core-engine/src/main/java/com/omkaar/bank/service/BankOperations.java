@@ -1,12 +1,15 @@
 package com.omkaar.bank.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import com.omkaar.bank.model.Account;
 import com.omkaar.bank.model.LoanRequest;
+import com.omkaar.bank.model.Transaction;
 
 public interface BankOperations {
 
-    void registerAccount(String accountId);
+    void registerAccount(Account account);
 
     void deposit(String accountId, BigDecimal amount);
 
@@ -19,4 +22,7 @@ public interface BankOperations {
     void requestLoan(String accountId, BigDecimal amount);
 
     LoanRequest processNextLoanRequest();
+
+    List<Transaction> getTransactionHistory(String accountId);
+
 }
