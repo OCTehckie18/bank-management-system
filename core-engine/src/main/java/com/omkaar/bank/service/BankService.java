@@ -28,6 +28,7 @@ public class BankService implements BankOperations {
                 "Account registration must be done via domain creation");
     }
 
+    @Override
     public void deposit(String accountId, BigDecimal amount) {
         Account account = getAccount(accountId);
 
@@ -42,6 +43,7 @@ public class BankService implements BankOperations {
         transactionStack.push(tx);
     }
 
+    @Override
     public void withdraw(String accountId, BigDecimal amount) {
         Account account = getAccount(accountId);
 
@@ -56,6 +58,7 @@ public class BankService implements BankOperations {
         transactionStack.push(tx);
     }
 
+    @Override
     public void transfer(String fromId, String toId, BigDecimal amount) {
         Account from = getAccount(fromId);
         Account to = getAccount(toId);
@@ -72,6 +75,7 @@ public class BankService implements BankOperations {
         transactionStack.push(tx);
     }
 
+    @Override
     public void undoLastTransaction() {
         if (transactionStack.isEmpty()) {
             throw new IllegalStateException("No transactions to undo");
@@ -106,6 +110,7 @@ public class BankService implements BankOperations {
         return acc;
     }
 
+    @Override
     public void requestLoan(String accountId, BigDecimal amount) {
         getAccount(accountId); // validate existence
 
@@ -113,6 +118,7 @@ public class BankService implements BankOperations {
         loanQueue.offer(request);
     }
 
+    @Override
     public LoanRequest processNextLoanRequest() {
         LoanRequest request = loanQueue.poll();
 
