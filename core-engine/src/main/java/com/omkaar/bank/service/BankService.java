@@ -3,6 +3,7 @@ package com.omkaar.bank.service;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Stack;
@@ -17,6 +18,7 @@ public class BankService implements BankOperations {
     private final Map<String, Account> accounts = new HashMap<>();
     private final Stack<Transaction> transactionStack = new Stack<>();
     private final Queue<LoanRequest> loanQueue = new LinkedList<>();
+    private final TransactionHistory transactionHistory = new InMemoryTransactionHistory();
 
     public void registerAccount(Account account) {
         accounts.put(account.getAccountId(), account);
@@ -41,6 +43,8 @@ public class BankService implements BankOperations {
                 amount);
 
         transactionStack.push(tx);
+        transactionHistory.record(tx);
+
     }
 
     @Override
@@ -56,6 +60,8 @@ public class BankService implements BankOperations {
                 amount);
 
         transactionStack.push(tx);
+        transactionHistory.record(tx);
+
     }
 
     @Override
@@ -73,6 +79,8 @@ public class BankService implements BankOperations {
                 amount);
 
         transactionStack.push(tx);
+        transactionHistory.record(tx);
+
     }
 
     @Override
@@ -130,6 +138,10 @@ public class BankService implements BankOperations {
         account.deposit(request.getAmount());
 
         return request;
+    }
+
+    public List<Transaction> getTransactionHistory(String accountId) {
+        return transactionHistory.getByAccountId(accountId);
     }
 
 }

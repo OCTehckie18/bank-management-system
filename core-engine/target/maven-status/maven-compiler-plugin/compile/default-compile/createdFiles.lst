@@ -1,3 +1,4 @@
+com\omkaar\bank\service\TransactionHistory.class
 com\omkaar\bank\model\AccountType.class
 com\omkaar\bank\service\BankOperations.class
 com\omkaar\bank\exception\AccountFrozenException.class
@@ -7,6 +8,7 @@ com\omkaar\bank\service\AccountFactory.class
 com\omkaar\bank\service\BankService.class
 com\omkaar\bank\model\CurrentAccount.class
 com\omkaar\bank\model\SavingsAccount.class
+com\omkaar\bank\service\InMemoryTransactionHistory.class
 com\omkaar\bank\service\BankService$1.class
 com\omkaar\bank\model\Account.class
 com\omkaar\bank\service\AccountFactory$1.class
