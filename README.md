@@ -1,3 +1,7 @@
+![Java](https://img.shields.io/badge/Java-21-blue)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.x-green)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
 # Bank Management System (Java + Spring Boot)
 
 A modular, backend-focused Bank Management System built step-by-step using **core Java**, **data structures**, and **Spring Boot**, designed to be learning-oriented and job-ready.
