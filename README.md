@@ -62,13 +62,47 @@ A modular, backend-focused Bank Management System built step-by-step using **cor
 
 ---
 
+## Phase 4 – Persistence Layer (Database-Backed Core)
+
+### What was implemented
+
+- Introduced relational persistence using Spring Data JPA
+- Designed database schema for:
+  - Accounts
+  - Transactions (append-only ledger)
+  - Loan requests
+- Added Flyway-ready entity mappings
+- Implemented repositories for all aggregates
+- Replaced in-memory storage with DB-backed services
+- Introduced clean mappers (Domain ↔ Entity)
+- Enforced UUID-based identity across service layer
+- Aligned REST controllers to UUID boundaries
+- Introduced DTO-style `TransactionView` to avoid leaking JPA entities
+- Persistence layer designed to be database-agnostic (tested with in-memory DB)
+
+### Architectural highlights
+
+- Core domain remains persistence-agnostic
+- `core-engine` has **zero dependency** on JPA or Spring
+- `bank-api` adapts persistence to domain via mappers
+- Controllers expose DTOs, not entities
+- Strict module boundaries enforced by compiler
+
+### Status
+
+- Core banking flows (create, deposit, withdraw, transfer) are fully DB-backed
+- Loan processing and undo functionality are stubbed intentionally
+  and scheduled for implementation in Phase 5/6
+
+---
+
 ## Technology Stack
 
 - Java 21
 - Spring Boot 3.3.x
 - Maven
 - Swagger / OpenAPI
-- In-memory data structures (Stack, Queue, Map)
+- Java collections (Stack, Queue) for algorithmic workflows (Phase 2/3)
 
 ---
 
@@ -82,12 +116,6 @@ bank-management-system/
 ---
 
 ## Upcoming Phases
-
-- **Phase 4 – Database Integration**
-
-  - JPA / Hibernate
-  - PostgreSQL or MySQL
-  - Persistent audit trail
 
 - **Phase 5 – Security**
 
@@ -105,11 +133,12 @@ bank-management-system/
 ## How to Run
 
 ```bash
-# Run core engine tests
+# Build core engine (pure Java)
 cd core-engine
 mvn clean install
 
 # Run Spring Boot API
 cd ../bank-api
 mvn spring-boot:run
+
 ```
