@@ -1,8 +1,13 @@
 package com.omkaar.bank.controller;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.omkaar.bank.model.Account;
 import com.omkaar.bank.model.AccountType;
@@ -23,22 +28,25 @@ public class AccountController {
     public String createAccount(
             @RequestParam AccountType type,
             @RequestParam BigDecimal initialBalance) {
+
         Account account = AccountFactory.createAccount(type, initialBalance);
         bank.registerAccount(account);
-        return account.getAccountId();
+        return account.getAccountId(); // still String externally
     }
 
     @PostMapping("/{id}/deposit")
     public void deposit(
-            @PathVariable String id,
+            @PathVariable UUID id,
             @RequestParam BigDecimal amount) {
+
         bank.deposit(id, amount);
     }
 
     @PostMapping("/{id}/withdraw")
     public void withdraw(
-            @PathVariable String id,
+            @PathVariable UUID id,
             @RequestParam BigDecimal amount) {
+
         bank.withdraw(id, amount);
     }
 }

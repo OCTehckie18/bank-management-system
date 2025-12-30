@@ -1,13 +1,10 @@
 package com.omkaar.bank.controller;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.omkaar.bank.model.LoanRequest;
 import com.omkaar.bank.service.BankOperations;
 
 @RestController
@@ -22,13 +19,14 @@ public class LoanController {
 
     @PostMapping("/request")
     public void requestLoan(
-            @RequestParam String accountId,
+            @RequestParam UUID accountId,
             @RequestParam BigDecimal amount) {
+
         bank.requestLoan(accountId, amount);
     }
 
-    @PostMapping("/process")
-    public LoanRequest processLoan() {
-        return bank.processNextLoanRequest();
+    @PostMapping("/process-next")
+    public void processNextLoan() {
+        bank.processNextLoan();
     }
 }

@@ -1,7 +1,6 @@
 package com.omkaar.bank.model;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import com.omkaar.bank.exception.AccountFrozenException;
 import com.omkaar.bank.exception.InsufficientBalanceException;
@@ -13,9 +12,17 @@ public abstract class Account {
     protected boolean frozen;
 
     protected Account(BigDecimal initialBalance) {
-        this.accountId = UUID.randomUUID().toString();
+        this.accountId = java.util.UUID.randomUUID().toString();
         this.balance = initialBalance;
         this.frozen = false;
+    }
+
+    protected Account(String accountId,
+            BigDecimal balance,
+            boolean frozen) {
+        this.accountId = accountId;
+        this.balance = balance;
+        this.frozen = frozen;
     }
 
     public String getAccountId() {
@@ -65,5 +72,8 @@ public abstract class Account {
         }
     }
 
+    public abstract AccountType getType();
+
     public abstract void applyMonthlyInterest();
+
 }

@@ -4,15 +4,25 @@ import java.math.BigDecimal;
 
 public class SavingsAccount extends Account {
 
-    private static final BigDecimal INTEREST_RATE = new BigDecimal("0.03");
-
+    // Used when creating a NEW account
     public SavingsAccount(BigDecimal initialBalance) {
         super(initialBalance);
     }
 
+    // Used when LOADING from persistence
+    public SavingsAccount(String accountId,
+            BigDecimal balance,
+            boolean frozen) {
+        super(accountId, balance, frozen);
+    }
+
+    @Override
+    public AccountType getType() {
+        return AccountType.SAVINGS;
+    }
+
     @Override
     public void applyMonthlyInterest() {
-        BigDecimal interest = balance.multiply(INTEREST_RATE);
-        credit(interest);
+        // implement later
     }
 }

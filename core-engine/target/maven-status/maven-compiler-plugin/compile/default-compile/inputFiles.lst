@@ -4,11 +4,12 @@ C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\jav
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\AccountType.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\CurrentAccount.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\LoanRequest.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\LoanStatus.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\SavingsAccount.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\Transaction.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\TransactionType.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\model\TransactionView.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\service\AccountFactory.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\service\BankOperations.java
-C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\service\BankService.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\service\InMemoryTransactionHistory.java
 C:\Users\Omkaar\Desktop\Projects\bank-management-system\core-engine\src\main\java\com\omkaar\bank\service\TransactionHistory.java
