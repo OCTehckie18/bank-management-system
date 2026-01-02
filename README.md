@@ -142,3 +142,22 @@ cd ../bank-api
 mvn spring-boot:run
 
 ```
+
+---
+
+## Configuration & Git Hygiene
+
+This project follows standard Git and configuration best practices to ensure
+security and clean version control.
+
+### Environment Variables
+
+- Database credentials and environment-specific configuration are **not hardcoded**
+- Sensitive values are expected to be supplied via environment variables
+- Example configuration is referenced in `application.properties` using placeholders
+
+```properties
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
+```
