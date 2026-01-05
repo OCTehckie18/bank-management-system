@@ -32,12 +32,19 @@ public class BankServiceImpl implements BankOperations {
     @Transactional
     public void registerAccount(Account account) {
         AccountEntity entity = AccountMapper.toEntity(account);
-        accountRepository.save(entity);
+        if (entity != null) {
+            accountRepository.save(entity);
+        } else {
+            throw new IllegalArgumentException("Failed to map account to entity");
+        }
     }
 
     @Override
     @Transactional
     public void deposit(UUID accountId, BigDecimal amount) {
+        if (accountId == null) {
+            throw new IllegalArgumentException("Account ID cannot be null");
+        }
 
         AccountEntity entity = accountRepository.findById(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("Account not found"));
@@ -49,12 +56,17 @@ public class BankServiceImpl implements BankOperations {
         accountRepository.save(entity);
 
         TransactionEntity tx = TransactionMapper.deposit(accountId, amount);
-        transactionRepository.save(tx);
+        if (tx != null) {
+            transactionRepository.save(tx);
+        }
     }
 
     @Override
     @Transactional
     public void withdraw(UUID accountId, BigDecimal amount) {
+        if (accountId == null) {
+            throw new IllegalArgumentException("Account ID cannot be null");
+        }
 
         AccountEntity entity = accountRepository.findById(accountId)
                 .orElseThrow(() -> new IllegalArgumentException("Account not found"));
@@ -66,12 +78,17 @@ public class BankServiceImpl implements BankOperations {
         accountRepository.save(entity);
 
         TransactionEntity tx = TransactionMapper.withdraw(accountId, amount);
-        transactionRepository.save(tx);
+        if (tx != null) {
+            transactionRepository.save(tx);
+        }
     }
 
     @Override
     @Transactional
     public void transfer(UUID fromId, UUID toId, BigDecimal amount) {
+        if (fromId == null || toId == null) {
+            throw new IllegalArgumentException("Account IDs cannot be null");
+        }
 
         AccountEntity fromEntity = accountRepository.findById(fromId)
                 .orElseThrow(() -> new IllegalArgumentException("Source account not found"));
@@ -92,12 +109,17 @@ public class BankServiceImpl implements BankOperations {
         accountRepository.save(toEntity);
 
         TransactionEntity tx = TransactionMapper.transfer(fromId, toId, amount);
-        transactionRepository.save(tx);
+        if (tx != null) {
+            transactionRepository.save(tx);
+        }
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<TransactionView> getTransactionHistory(UUID accountId) {
+        if (accountId == null) {
+            throw new IllegalArgumentException("Account ID cannot be null");
+        }
         return transactionRepository
                 .findByFromAccountIdOrToAccountId(accountId, accountId)
                 .stream()

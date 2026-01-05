@@ -8,10 +8,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRuntime(RuntimeException ex) {
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<String> handleInsufficientBalance(
+            InsufficientBalanceException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(AccountFrozenException.class)
+    public ResponseEntity<String> handleFrozenAccount(
+            AccountFrozenException ex) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(ex.getMessage());
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<String> handleGeneric(RuntimeException ex) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Internal server error");
     }
 }
