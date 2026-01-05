@@ -1,0 +1,15 @@
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\BankApplication.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\config\CoreConfig.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\controller\AccountController.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\controller\LoanController.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\controller\TransactionController.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\entity\AccountEntity.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\entity\LoanRequestEntity.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\entity\TransactionEntity.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\exception\GlobalExceptionHandler.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\mapper\AccountMapper.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\mapper\TransactionMapper.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\repository\AccountRepository.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\repository\LoanRequestRepository.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\repository\TransactionRepository.java
+C:\Users\Omkaar\Desktop\Projects\bank-management-system\bank-api\src\main\java\com\omkaar\bank\service\BankServiceImpl.java
