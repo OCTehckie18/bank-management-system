@@ -1,6 +1,7 @@
 package com.omkaar.bank.mapper;
 
 import java.time.Instant;
+import java.util.Objects;
 import java.util.UUID;
 
 import com.omkaar.bank.entity.AccountEntity;
@@ -16,6 +17,8 @@ public final class AccountMapper {
 
     // Domain → Entity
     public static AccountEntity toEntity(Account domain) {
+        Objects.requireNonNull(domain, "Account must not be null");
+
         return new AccountEntity(
                 UUID.fromString(domain.getAccountId()),
                 domain.getType(),
@@ -41,4 +44,5 @@ public final class AccountMapper {
                     entity.isFrozen());
         };
     }
+
 }
